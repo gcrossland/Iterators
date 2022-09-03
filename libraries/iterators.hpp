@@ -1,7 +1,7 @@
 /** @file */
 /* -----------------------------------------------------------------------------
    Iterators Library
-   © Geoff Crossland 2017
+   © Geoff Crossland 2017-2022
 ----------------------------------------------------------------------------- */
 #ifndef ITERATORS_ALREADYINCLUDED
 #define ITERATORS_ALREADYINCLUDED
@@ -16,7 +16,7 @@ extern DC();
 
 // TODO split into Window and BufferedWindow
 class BufferedWindow {
-  prv static constexpr iu8f *const endedMarker = static_cast<iu8f *>(nullptr) + 1;
+  prv static iu8f *const endedMarker;
   prv iu8f *i;
   prv iu8f *end;
   prv std::unique_ptr<iu8f []> b;

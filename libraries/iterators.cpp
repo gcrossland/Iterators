@@ -8,6 +8,8 @@ namespace iterators {
 ----------------------------------------------------------------------------- */
 DC();
 
+iu8f *const BufferedWindow::endedMarker = static_cast<iu8f *>(nullptr) + 1;
+
 BufferedWindow::BufferedWindow (size_t capacity_) {
   DPRE(capacity_ != 0);
   b.reset(new iu8f[capacity_]);
