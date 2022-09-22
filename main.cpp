@@ -78,13 +78,13 @@ struct TestBiInputStream {
   }
 };
 
-const char *STRS[] = {"", "a", "to", "for", "with", "under", "within", "between", "around and about", "this is a longer string"};
-size_t BUFFER_CAPACITIES[] = {1U, 2U, 3U, 5U, 8U, 11U, 4096U};
+const char *strs[] = {"", "a", "to", "for", "with", "under", "within", "between", "around and about", "this is a longer string"};
+const size_t bufferCapacities[] = {1U, 2U, 3U, 5U, 8U, 11U, 4096U};
 
 void testInputStreamIterator () {
-  for (const char *str : STRS) {
+  for (const char *str : strs) {
     auto data = reinterpret_cast<const iu8f *>(str);
-    for (size_t bufferCapacity : BUFFER_CAPACITIES) {
+    for (size_t bufferCapacity : bufferCapacities) {
       TestInputStream stream(data);
       InputStreamIterator<TestInputStream> i(stream, bufferCapacity);
 
@@ -94,13 +94,13 @@ void testInputStreamIterator () {
   }
 
   enum SwitchOverTrigger {
-    INDIRECTION,
-    EQ
+    indirection,
+    eq
   };
-  for (SwitchOverTrigger switchOverTrigger : {INDIRECTION, EQ}) {
+  for (SwitchOverTrigger switchOverTrigger : {indirection, eq}) {
     const char *strs[] = {"this ", "is a string in two parts"};
     auto datas = reinterpret_cast<const iu8f **>(strs);
-    for (size_t bufferCapacity : BUFFER_CAPACITIES) {
+    for (size_t bufferCapacity : bufferCapacities) {
       TestBiInputStream stream(TestInputStream{datas[0]}, TestInputStream{datas[1]});
       InputStreamIterator<TestBiInputStream> i(stream, bufferCapacity);
 
@@ -111,10 +111,10 @@ void testInputStreamIterator () {
 
       check(!stream.switchedOver);
       switch (switchOverTrigger) {
-        case INDIRECTION:
+        case indirection:
           check(*datas[1], *i);
           break;
-        case EQ:
+        case eq:
           check(false, i == InputStreamEndIterator<TestBiInputStream>());
           break;
       }
@@ -205,9 +205,9 @@ struct TestOutputStream {
 };
 
 void testOutputStreamIterator () {
-  for (const char *str : STRS) {
+  for (const char *str : strs) {
     auto data = reinterpret_cast<const iu8f *>(str);
-    for (size_t bufferCapacity : BUFFER_CAPACITIES) {
+    for (size_t bufferCapacity : bufferCapacities) {
       TestOutputStream stream;
       OutputStreamIterator<TestOutputStream> i(stream, bufferCapacity);
 

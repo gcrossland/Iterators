@@ -18,7 +18,7 @@ BufferedWindow::BufferedWindow (size_t capacity_) {
 
 BufferedWindow::BufferedWindow () noexcept {
   capacity = 0;
-  i = ENDED;
+  i = endedMarker;
   end = i + 1;
 }
 
@@ -62,12 +62,12 @@ void BufferedWindow::reset (size_t size) noexcept {
 
 void BufferedWindow::unset () noexcept {
   b.release();
-  i = ENDED;
+  i = endedMarker;
   end = i + 1;
 }
 
 bool BufferedWindow::ended () const noexcept {
-  return i == ENDED;
+  return i == endedMarker;
 }
 
 iu8f &BufferedWindow::operator* () noexcept {

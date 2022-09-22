@@ -16,7 +16,7 @@ extern DC();
 
 // TODO split into Window and BufferedWindow
 class BufferedWindow {
-  prv static constexpr iu8f *const ENDED = static_cast<iu8f *>(nullptr) + 1;
+  prv static constexpr iu8f *const endedMarker = static_cast<iu8f *>(nullptr) + 1;
   prv iu8f *i;
   prv iu8f *end;
   prv std::unique_ptr<iu8f []> b;
