@@ -71,7 +71,7 @@ template<typename _Stream> class InputStreamEndIterator;
 */
 // TODO split into InputStreamBufferWindow and InputWindowIterator
 // TODO SimpleInputStreamIterator (move-only, no post inc, expected that inc can cause blocking)
-template<typename _Stream> class InputStreamIterator : public std::iterator<std::input_iterator_tag, iu8f, void, iu8f *, iu8f> {
+template<typename _Stream> class InputStreamIterator : public std::iterator<std::input_iterator_tag, iu8f, std::ptrdiff_t, iu8f *, iu8f> {
   friend class InputStreamEndIterator<_Stream>;
 
   prv BufferedWindow window;
@@ -121,7 +121,7 @@ template<typename _Stream> class InputStreamEndIterator : public InputStreamIter
   passed to the underlying {@c OutputStream}.
 */
 // TODO split into OutputStreamBufferWindow and OutputWindowIterator
-template<typename _Stream> class OutputStreamIterator : public std::iterator<std::output_iterator_tag, iu8f, void> {
+template<typename _Stream> class OutputStreamIterator : public std::iterator<std::output_iterator_tag, iu8f, std::ptrdiff_t> {
   prv BufferedWindow window;
   prv _Stream *stream;
   DI(prv is8f indirectionsMinusIncrements;)

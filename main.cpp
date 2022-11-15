@@ -7,11 +7,12 @@ using core::string;
 using std::move;
 using core::numeric_limits;
 using iterators::InputStreamIterator;
+using core::InputIterator;
 using iterators::InputStreamEndIterator;
 using iterators::OutputStreamIterator;
+using core::OutputIterator;
 using iterators::RevaluedIterator;
 using std::vector;
-using core::offset;
 
 /* -----------------------------------------------------------------------------
 ----------------------------------------------------------------------------- */
@@ -82,6 +83,8 @@ const char *strs[] = {"", "a", "to", "for", "with", "under", "within", "between"
 const size_t bufferCapacities[] = {1U, 2U, 3U, 5U, 8U, 11U, 4096U};
 
 void testInputStreamIterator () {
+  check(InputIterator<InputStreamIterator<TestInputStream>, iu8f>);
+
   for (const char *str : strs) {
     auto data = reinterpret_cast<const iu8f *>(str);
     for (size_t bufferCapacity : bufferCapacities) {
@@ -205,6 +208,8 @@ struct TestOutputStream {
 };
 
 void testOutputStreamIterator () {
+  check(OutputIterator<OutputStreamIterator<TestOutputStream>, iu8f>);
+
   for (const char *str : strs) {
     auto data = reinterpret_cast<const iu8f *>(str);
     for (size_t bufferCapacity : bufferCapacities) {
